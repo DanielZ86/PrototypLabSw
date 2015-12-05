@@ -20,11 +20,8 @@ public:
     ~HauptFenster();
     Overlay *helpWindow;
     QThread *t;
-    void run();
 
 void setOverlay();
-
-
 
 private:
     Ui::HauptFenster *ui;
