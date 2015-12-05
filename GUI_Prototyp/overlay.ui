@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Overlay</class>
+ <widget class="QMainWindow" name="Overlay">
+  <property name="windowModality">
+   <enum>Qt::NonModal</enum>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="mouseTracking">
+   <bool>false</bool>
+  </property>
+  <property name="focusPolicy">
+   <enum>Qt::NoFocus</enum>
+  </property>
+  <property name="windowTitle">
+   <string>Dynamic Help</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="icons.qrc">
+    <normaloff>:/labsw/icons/labsw/dynamic-help.png</normaloff>:/labsw/icons/labsw/dynamic-help.png</iconset>
+  </property>
+  <property name="windowOpacity">
+   <double>0.400000000000000</double>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <property name="toolButtonStyle">
+   <enum>Qt::ToolButtonTextBesideIcon</enum>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+ </widget>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
+ <connections/>
+</ui>

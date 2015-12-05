@@ -1,0 +1,20 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>icons/app-icon.png</file>
+        <file>icons/DataManager.png</file>
+        <file>icons/document-open.png</file>
+        <file>icons/document-save.png</file>
+        <file>icons/edit-delete.png</file>
+        <file>icons/edit-redo.png</file>
+        <file>icons/edit-undo.png</file>
+        <file>icons/StdMultiWidgetEditor.png</file>
+        <file>icons/system-log-out.png</file>
+    </qresource>
+    <qresource prefix="/contextMenu">
+        <file>icons/context_menu/Remove_48.png</file>
+        <file>icons/context_menu/Save_48.png</file>
+    </qresource>
+    <qresource prefix="/labsw">
+        <file>icons/labsw/dynamic-help.png</file>
+    </qresource>
+</RCC>

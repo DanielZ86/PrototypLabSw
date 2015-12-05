@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>HauptFenster</class>
+ <widget class="QMainWindow" name="HauptFenster">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>783</width>
+    <height>572</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MITK</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="icons.qrc">
+    <normaloff>:/icons/icons/app-icon.png</normaloff>:/icons/icons/app-icon.png</iconset>
+  </property>
+  <property name="toolButtonStyle">
+   <enum>Qt::ToolButtonTextBesideIcon</enum>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>783</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen_File"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSave_Project"/>
+    <addaction name="actionClose_Project"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+   </widget>
+   <widget class="QMenu" name="menuWindow">
+    <property name="title">
+     <string>Window</string>
+    </property>
+    <addaction name="actionOpen_Perspective"/>
+    <addaction name="actionShow_View"/>
+    <addaction name="separator"/>
+    <addaction name="actionReset_Perspective"/>
+    <addaction name="actionClose_Perspective"/>
+    <addaction name="separator"/>
+    <addaction name="actionPreferences"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionWelcome"/>
+    <addaction name="actionOpen_Help_Perspective"/>
+    <addaction name="actionContext_Help"/>
+    <addaction name="actionAbout"/>
+    <addaction name="actionDynamic_Help"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
+   <addaction name="menuWindow"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextBesideIcon</enum>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionOpen_File"/>
+   <addaction name="actionSave_Project"/>
+   <addaction name="actionClose_Project"/>
+   <addaction name="actionRedo"/>
+   <addaction name="actionUndo"/>
+  </widget>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionOpen_Help_Perspective"/>
+   <addaction name="actionContext_Help"/>
+   <addaction name="actionDynamic_Help"/>
+  </widget>
+  <action name="actionOpen_File">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/icons/document-open.png</normaloff>:/icons/icons/document-open.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open File...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionSave_Project">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/icons/document-save.png</normaloff>:/icons/icons/document-save.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save Project</string>
+   </property>
+  </action>
+  <action name="actionClose_Project">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/icons/edit-delete.png</normaloff>:/icons/icons/edit-delete.png</iconset>
+   </property>
+   <property name="text">
+    <string>Close Project</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/icons/system-log-out.png</normaloff>:/icons/icons/system-log-out.png</iconset>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/icons/edit-undo.png</normaloff>:/icons/icons/edit-undo.png</iconset>
+   </property>
+   <property name="text">
+    <string>Undo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/icons/icons/edit-redo.png</normaloff>:/icons/icons/edit-redo.png</iconset>
+   </property>
+   <property name="text">
+    <string>Redo</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Y</string>
+   </property>
+  </action>
+  <action name="actionOpen_Perspective">
+   <property name="text">
+    <string>Open Perspective</string>
+   </property>
+  </action>
+  <action name="actionShow_View">
+   <property name="text">
+    <string>Show View</string>
+   </property>
+  </action>
+  <action name="actionReset_Perspective">
+   <property name="text">
+    <string>Reset Perspective</string>
+   </property>
+  </action>
+  <action name="actionClose_Perspective">
+   <property name="text">
+    <string>Close Perspective</string>
+   </property>
+  </action>
+  <action name="actionPreferences">
+   <property name="text">
+    <string>Preferences</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionWelcome">
+   <property name="text">
+    <string>Welcome</string>
+   </property>
+  </action>
+  <action name="actionOpen_Help_Perspective">
+   <property name="text">
+    <string>Open Help Perspective</string>
+   </property>
+  </action>
+  <action name="actionContext_Help">
+   <property name="text">
+    <string>Context Help</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+   <property name="shortcut">
+    <string>F1</string>
+   </property>
+  </action>
+  <action name="actionDynamic_Help">
+   <property name="icon">
+    <iconset resource="icons.qrc">
+     <normaloff>:/labsw/icons/labsw/dynamic-help.png</normaloff>:/labsw/icons/labsw/dynamic-help.png</iconset>
+   </property>
+   <property name="text">
+    <string>Dynamic Help</string>
+   </property>
+   <property name="shortcut">
+    <string>F2</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="icons.qrc"/>
+ </resources>
+ <connections/>
+ <slots>
+  <slot>closeAlleWindow()</slot>
+ </slots>
+</ui>
