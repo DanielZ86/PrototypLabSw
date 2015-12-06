@@ -7,12 +7,14 @@ ThreadStayHelpOnTop::ThreadStayHelpOnTop(QMainWindow *main)
 }
 
 void ThreadStayHelpOnTop::run(){
-    while (1) {
+    while (! isThreadstopped)
         {
-        mainWindow->activateWindow();
-     // mainWindow->raise();
-     // qDebug()<<"From worker thread: " << mainWindow->set;
-        msleep(100);
+            mainWindow->activateWindow();
+            qDebug() << "Hallo";
+            msleep(100);
         }
-    }
+
+}
+void ThreadStayHelpOnTop::stop(){
+    isThreadstopped = true;
 }
