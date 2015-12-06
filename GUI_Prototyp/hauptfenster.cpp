@@ -63,8 +63,6 @@ void HauptFenster::slotActionDynamicHelp(){
         isHelpOn=true;
         t = new ThreadStayHelpOnTop(helpWindow);
         t->start();
-        QToolBar *toolBar = ui->toolBarFileAndEdit;
-        setHelpOnQToolBarAndOnPos("Save Project", toolBar,  helpWindow);
     }
 }
 
@@ -291,7 +289,13 @@ void hauptFenster::setHelpOnQMenue(QString nameOfPos, QMenuBar *qMenuBar){
 */
 
 void HauptFenster::slotActionWorkflowFileOpenFile(){
-
+    if(isHelpOn){
+        helpWindow->close();
+        isHelpOn = false;
+    }
+    slotActionDynamicHelp();
+    QToolBar *toolBar = ui->toolBarFileAndEdit;
+    setHelpOnQToolBarAndOnPos("Open File", toolBar,  helpWindow);
 }
 
 void HauptFenster::slotActionWorkflowFileSave(){
@@ -299,11 +303,23 @@ void HauptFenster::slotActionWorkflowFileSave(){
 }
 
 void HauptFenster::slotActionWorkflowFileSaveProject(){
-
+    if(isHelpOn){
+        helpWindow->close();
+        isHelpOn = false;
+    }
+    slotActionDynamicHelp();
+    QToolBar *toolBar = ui->toolBarFileAndEdit;
+    setHelpOnQToolBarAndOnPos("Save Project", toolBar,  helpWindow);
 }
 
 void HauptFenster::slotActionWorkflowFileCloseProject(){
-
+if(isHelpOn){
+    helpWindow->close();
+    isHelpOn = false;
+}
+    slotActionDynamicHelp();
+        QToolBar *toolBar = ui->toolBarFileAndEdit;
+        setHelpOnQToolBarAndOnPos("Close Project", toolBar,  helpWindow);
 }
 
 void HauptFenster::slotActionWorkflowFileExit(){
