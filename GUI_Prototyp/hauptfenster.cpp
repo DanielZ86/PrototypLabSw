@@ -7,6 +7,7 @@ HauptFenster::HauptFenster(QWidget *parent) :
     ui(new Ui::HauptFenster)
 {
     ui->setupUi(this);
+
 }
 
 HauptFenster::~HauptFenster()
@@ -21,31 +22,32 @@ void HauptFenster::slotActionExit(){
 }
 
 void HauptFenster::closeEvent(QCloseEvent *event){
-    qDebug() << event;
+    // // qDebug() << event;
     this->close();
     if(isHelpOn)
     helpWindow->close();
 }
 
 void HauptFenster::slotActionAbout(){
-    qDebug() << "slotActionAbout";
+    // // qDebug() << "slotActionAbout";
 }
 
 void HauptFenster::slotActionClosePerspective(){
-    qDebug() << "slotActionClosePerspective";
+    // // qDebug() << "slotActionClosePerspective";
 }
 
 void HauptFenster::slotActionCloseProject(){
-    qDebug() << "slotActionCloseProject";
+    // // qDebug() << "slotActionCloseProject";
     ui->listWidget->clear();
+    ui->graphicsView->setScene(NULL);
 }
 
 void HauptFenster::slotActionContextHelp(){
-    qDebug() << "slotActionContextHelp";
+    // // qDebug() << "slotActionContextHelp";
 }
 
 void HauptFenster::slotActionDynamicHelp(){
-    qDebug() << "slotActionDynamicHelp";
+    // // qDebug() << "slotActionDynamicHelp";
     if(isHelpOn){
         helpWindow->close();
         t->stop();
@@ -60,7 +62,7 @@ void HauptFenster::slotActionDynamicHelp(){
 }
 
 void HauptFenster::slotActionOpenFile(){
-    qDebug() << "slotActionOpenFile";
+    // // qDebug() << "slotActionOpenFile";
     QString imagePath = QFileDialog::getOpenFileName(this, tr("Open File"),"C://","Picture (*.png);; Project (*.xml)");
     if(imagePath.endsWith(".png")){
         addFile(imagePath);
@@ -71,27 +73,27 @@ void HauptFenster::slotActionOpenFile(){
 }
 
 void HauptFenster::slotActionOpenHelpPerspective(){
-    qDebug() << "slotActionOpenHelpPerspective";
+    // // qDebug() << "slotActionOpenHelpPerspective";
 }
 
 void HauptFenster::slotActionOpenPerspective(){
-    qDebug() << "slotActionOpenPerspective";
+    // // qDebug() << "slotActionOpenPerspective";
 }
 
 void HauptFenster::slotActionPreferences(){
-    qDebug() << "slotActionPreferences";
+    // // qDebug() << "slotActionPreferences";
 }
 
 void HauptFenster::slotActionRedo(){
-    qDebug() << "slotActionRedo";
+    // // qDebug() << "slotActionRedo";
 }
 
 void HauptFenster::slotActionResetPerspective(){
-    qDebug() << "slotActionResetPerspective";
+    // // qDebug() << "slotActionResetPerspective";
 }
 
 void HauptFenster::slotActionSave(){
-    qDebug() << "slotActionSave";
+    // // qDebug() << "slotActionSave";
     int i = ui->listWidget->currentRow();
     QString imagePath = QFileDialog::getSaveFileName(this, tr("Save File"),"C://","PNG (*.png)");
     QFile file(imagePath);
@@ -99,20 +101,20 @@ void HauptFenster::slotActionSave(){
 }
 
 void HauptFenster::slotActionSaveProject(){
-    qDebug() << "slotActionSaveProject";
+    // // qDebug() << "slotActionSaveProject";
     writeXML();
 }
 
 void HauptFenster::slotActionShowView(){
-    qDebug() << "slotActionShowView";
+    // // qDebug() << "slotActionShowView";
 }
 
 void HauptFenster::slotActionUndo(){
-    qDebug() << "slotActionUndo";
+    // // qDebug() << "slotActionUndo";
 }
 
 void HauptFenster::slotActionWelcome(){
-    qDebug() << "slotActionWelcome";
+    // // qDebug() << "slotActionWelcome";
 }
 void HauptFenster::slotContextMenu(const QPoint& point){
     QMenu myMenu;
@@ -126,15 +128,15 @@ void HauptFenster::slotContextMenu(const QPoint& point){
 void HauptFenster::saveFile(){
     int i = ui->listWidget->currentRow();
     QString imagePath = QFileDialog::getSaveFileName(this, tr("Save File"),"C://","PNG (*.png)");
-    QFile file(imagePath);
-    QFile::copy(ui->listWidget->item(i)->text(), imagePath);
+    QFile file(imagePath);   
+    QFile::copy(ui->listWidget->item(i)->text(), imagePath);  
 }
 
 // Löscht ein ausgewähltes Bild in der Liste aus der Liste
 void HauptFenster::removeFile(){
     int i = ui->listWidget->currentRow();
     delete ui->listWidget->item(i);
-    scene->clear();
+    ui->graphicsView->setScene(NULL);
 }
 
 // Fügt ein neues Bild in die Liste ein.
@@ -150,34 +152,34 @@ void HauptFenster::addFile( QString imagePath ){
 
 void HauptFenster::pictureLoad(QListWidgetItem *item){
     imageObject = new QImage();
-    imageObject->load(item->text());
+    imageObject->load(item->text());  
     image = QPixmap::fromImage(*imageObject);
     scene = new QGraphicsScene(this);
     scene->addPixmap(image);
     scene->setSceneRect(image.rect());
-    graphicsView->setScene(scene);
+    ui->graphicsView->setScene(scene);
 }
 void HauptFenster::readXML(){
     QDomDocument document;
     QString imagePath = QFileDialog::getOpenFileName(this, tr("Open File"),"C://","XML (*.xml)");
     QFile file(imagePath);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
-        qDebug() << "Failed to open file";
+        // // qDebug() << "Failed to open file";
     }
     else{
         if(!document.setContent(&file)){
-          qDebug() << "Failed to load file";
+          // // qDebug() << "Failed to load file";
         }
         file.close();
     }
     QDomElement root = document.firstChildElement();
     listElements(root, "Pictures", "Name");
-    qDebug() << "Finished";
+    // // qDebug() << "Finished";
 }
 
 void HauptFenster::listElements(QDomElement root, QString tagname, QString attribute){
     QDomNodeList items = root.elementsByTagName(tagname);
-    qDebug() << "Total items = " << items.count();
+    // // qDebug() << "Total items = " << items.count();
     for(int i = 0; i < items.count(); i++){
         QDomNode itemnode = items.at(i);
         if(itemnode.isElement()){
@@ -202,13 +204,13 @@ void HauptFenster::writeXML(){
    QString imagePath = QFileDialog::getSaveFileName(this, tr("Choose File"),"C://","XML (*.xml)");
    QFile file(imagePath);
    if(!file.open(QIODevice::WriteOnly | QIODevice::Text)){
-      qDebug() << "Failed to open file for writting";
+      // // qDebug() << "Failed to open file for writting";
    }
    else{
        QTextStream stream(&file);
        stream << document.toString();
        file.close();
-        qDebug() << "Finished";
+        // // qDebug() << "Finished";
    }
 }
 
@@ -216,17 +218,17 @@ void HauptFenster::readXML(QString imagePath){
     QDomDocument document;
     QFile file(imagePath);
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text)){
-        qDebug() << "Failed to open file";
+        // // qDebug() << "Failed to open file";
     }
     else{
         if(!document.setContent(&file)){
-          qDebug() << "Failed to load file";
+          // // qDebug() << "Failed to load file";
         }
         file.close();
     }
     QDomElement root = document.firstChildElement();
     listElements(root, "Pictures", "Name");
-    qDebug() << "Finished";
+    // // qDebug() << "Finished";
 }
 
 

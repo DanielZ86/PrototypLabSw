@@ -13,6 +13,10 @@
 #include <QListWidgetItem>
 #include <QGraphicsScene>
 #include <QFileSystemModel>
+#include <QImage>
+#include <QPixmap>
+#include <QGraphicsScene>
+#include <QGraphicsView>
 
 namespace Ui {
 class HauptFenster;
@@ -67,6 +71,8 @@ public slots:
     void readXML(QString imagePath);
     void saveFile();
     void removeFile();
+
+
 
 };
 

@@ -10,7 +10,7 @@ void ThreadStayHelpOnTop::run(){
     while (! isThreadstopped)
         {
             mainWindow->activateWindow();
-            qDebug() << "Hallo";
+            // qDebug() << "Hallo";
             msleep(100);
         }
 

@@ -10,6 +10,7 @@ class ThreadStayHelpOnTop : public QThread
 
 public:
     ThreadStayHelpOnTop(QMainWindow *main);
+    void stop();
 
 public slots:
 
@@ -17,6 +18,7 @@ public slots:
 private:
     void run();
     QMainWindow *mainWindow;
+    bool isThreadstopped = false;
 
 };
 
