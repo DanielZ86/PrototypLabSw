@@ -17,6 +17,9 @@
 #include <QPixmap>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QToolBar>
+#include <QList>
+#include <QPushButton>
 
 namespace Ui {
 class HauptFenster;
@@ -31,19 +34,30 @@ public:
     ~HauptFenster();
 
 private:
+    void closeEvent(QCloseEvent *event);
+    void setHelpOnQToolBarAndOnPos(QString nameOfPos, QToolBar *qToolBar,  Overlay *helpWindow);
+
+    Ui::HauptFenster *ui;
     ThreadStayHelpOnTop *t;
     bool isHelpOn = false;
-    void closeEvent(QCloseEvent *event);
-    Ui::HauptFenster *ui;
     Overlay *helpWindow;
     QGraphicsView *graphicsView;
     QPixmap image;
     QImage  *imageObject;
     QGraphicsScene *scene;
     QFileSystemModel *fileModel;
-
+    QList<QPushButton*> helpButtons;
 
 public slots:
+    void pictureLoad(QListWidgetItem* item);
+    void readXML();
+    void writeXML();
+    void listElements(QDomElement root, QString tagname, QString attribute);
+    void readXML(QString imagePath);
+    void addFile();
+    void addFile(QString imagePath);
+    void saveFile();
+    void removeFile();
     void slotActionExit();
     void slotActionAbout();
     void slotActionClosePerspective();
@@ -62,18 +76,15 @@ public slots:
     void slotActionUndo();
     void slotActionWelcome();
     void slotContextMenu(const QPoint&);
-    void addFile();
-    void addFile(QString imagePath);
-    void pictureLoad(QListWidgetItem* item);
-    void readXML();
-    void writeXML();
-    void listElements(QDomElement root, QString tagname, QString attribute);
-    void readXML(QString imagePath);
-    void saveFile();
-    void removeFile();
-
-
-
+    void slotActionWorkflowFileOpenFile();
+    void slotActionWorkflowFileSave();
+    void slotActionWorkflowFileSaveProject();
+    void slotActionWorkflowFileCloseProject();
+    void slotActionWorkflowFileExit();
+    void slotActionWorkflowContextAddItem();
+    void slotActionWorkflowContextRemoveItem();
+    void slotActionWorkflowContextSaveItem();
+    void slotActionWorkflowShowPicture();
 };
 
 #endif // HAUPTFENSTER_H

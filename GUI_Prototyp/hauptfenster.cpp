@@ -1,6 +1,11 @@
 #include "hauptfenster.h"
 #include "ui_hauptfenster.h"
 #include <overlay.h>
+#include <QRect>
+#include <QPushButton>
+#include <QList>
+#include <QObject>
+#include <QToolButton>
 
 HauptFenster::HauptFenster(QWidget *parent) :
     QMainWindow(parent),
@@ -58,6 +63,8 @@ void HauptFenster::slotActionDynamicHelp(){
         isHelpOn=true;
         t = new ThreadStayHelpOnTop(helpWindow);
         t->start();
+        QToolBar *toolBar = ui->toolBarFileAndEdit;
+        setHelpOnQToolBarAndOnPos("Save Project", toolBar,  helpWindow);
     }
 }
 
@@ -159,6 +166,7 @@ void HauptFenster::pictureLoad(QListWidgetItem *item){
     scene->setSceneRect(image.rect());
     ui->graphicsView->setScene(scene);
 }
+
 void HauptFenster::readXML(){
     QDomDocument document;
     QString imagePath = QFileDialog::getOpenFileName(this, tr("Open File"),"C://","XML (*.xml)");
@@ -231,18 +239,8 @@ void HauptFenster::readXML(QString imagePath){
     // // qDebug() << "Finished";
 }
 
-
-
-
-
-
-
-
-
-
-/*
-void hauptFenster::setHelpOnQToolBarAndOnPos(QString nameOfPos, QToolBar *qToolBar,  QMainWindow *helpWindow){
-    QRect temp = hauptFenster::geometry();
+void HauptFenster::setHelpOnQToolBarAndOnPos(QString nameOfPos, QToolBar *qToolBar,  Overlay *helpWindow){
+    QRect temp = HauptFenster::geometry();
     QRect temp2 = qToolBar->geometry();
     QList<QObject*> listChildrenToolbar = qToolBar->children();
     foreach (QObject* firstObject, listChildrenToolbar) {
@@ -252,9 +250,13 @@ void hauptFenster::setHelpOnQToolBarAndOnPos(QString nameOfPos, QToolBar *qToolB
             int x = geo.x() + temp.x()  + geo.width() + temp2.x();
             int y = geo.y() +temp.y() + geo.height() + temp2.y()- temp2.height();
             if(inhertObject->text()== nameOfPos){
-              QPushButton *helpButton = new QPushButton();
-              helpButton->setText(inhertObject->text());
-              helpButton->setGeometry(x,y,30,30);
+              QPushButton *helpButton = new QPushButton(helpWindow);
+              helpButton->setText("<--- Click here.");
+              helpButton->setGeometry(x,y,100,30);
+              helpButton->setStyleSheet("{ color: white; background-color: black; }");
+              helpButton->setWindowOpacity(1.0);
+              helpButton->setAttribute(Qt::WA_TranslucentBackground, false);
+              helpButton->setFlat(true);
               helpButton->show();
               helpButtons.push_front(helpButton);
             }
@@ -262,7 +264,7 @@ void hauptFenster::setHelpOnQToolBarAndOnPos(QString nameOfPos, QToolBar *qToolB
     }
 }
 
-
+/*
 void hauptFenster::setHelpOnQMenue(QString nameOfPos, QMenuBar *qMenuBar){
     QRect temp = hauptFenster::geometry();
     QList<QObject*> listOfChildrenMenueBar =  qMenuBar->children();
@@ -287,4 +289,40 @@ void hauptFenster::setHelpOnQMenue(QString nameOfPos, QMenuBar *qMenuBar){
     }
 }
 */
+
+void HauptFenster::slotActionWorkflowFileOpenFile(){
+
+}
+
+void HauptFenster::slotActionWorkflowFileSave(){
+
+}
+
+void HauptFenster::slotActionWorkflowFileSaveProject(){
+
+}
+
+void HauptFenster::slotActionWorkflowFileCloseProject(){
+
+}
+
+void HauptFenster::slotActionWorkflowFileExit(){
+
+}
+
+void HauptFenster::slotActionWorkflowContextAddItem(){
+
+}
+
+void HauptFenster::slotActionWorkflowContextRemoveItem(){
+
+}
+
+void HauptFenster::slotActionWorkflowContextSaveItem(){
+
+}
+
+void HauptFenster::slotActionWorkflowShowPicture(){
+
+}
 

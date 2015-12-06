@@ -2,6 +2,8 @@
 #define OVERLAY_H
 
 #include <QMainWindow>
+#include <QToolBar>
+#include <QString>
 
 namespace Ui {
 class Overlay;

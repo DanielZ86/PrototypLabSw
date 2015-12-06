@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>751</width>
-    <height>287</height>
+    <width>891</width>
+    <height>558</height>
    </rect>
   </property>
   <property name="contextMenuPolicy">
@@ -32,7 +32,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>751</width>
+     <width>891</width>
      <height>21</height>
     </rect>
    </property>
@@ -70,18 +70,45 @@
     <property name="title">
      <string>Help</string>
     </property>
+    <widget class="QMenu" name="menuWorkflows">
+     <property name="title">
+      <string>Workflows</string>
+     </property>
+     <widget class="QMenu" name="menuContext">
+      <property name="title">
+       <string>Context</string>
+      </property>
+      <addaction name="actionWorkflowContextAddItem"/>
+      <addaction name="actionWorkflowContextRemoveItem"/>
+      <addaction name="actionWorkflowContextSaveItem"/>
+     </widget>
+     <widget class="QMenu" name="menuFile_2">
+      <property name="title">
+       <string>File</string>
+      </property>
+      <addaction name="actionWorkflowFileOpenFile"/>
+      <addaction name="actionWorkflowFileSave"/>
+      <addaction name="actionWorkflowFileSaveProject"/>
+      <addaction name="actionWorkflowFileCloseProject"/>
+      <addaction name="actionWorkflowFileExit"/>
+     </widget>
+     <addaction name="menuFile_2"/>
+     <addaction name="menuContext"/>
+     <addaction name="actionWorkflowShowPicture"/>
+    </widget>
     <addaction name="actionWelcome"/>
     <addaction name="actionOpen_Help_Perspective"/>
     <addaction name="actionContext_Help"/>
     <addaction name="actionAbout"/>
     <addaction name="actionDynamic_Help"/>
+    <addaction name="menuWorkflows"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
    <addaction name="menuWindow"/>
    <addaction name="menuHelp"/>
   </widget>
-  <widget class="QToolBar" name="mainToolBar">
+  <widget class="QToolBar" name="toolBarFileAndEdit">
    <property name="toolButtonStyle">
     <enum>Qt::ToolButtonTextBesideIcon</enum>
    </property>
@@ -97,7 +124,7 @@
    <addaction name="actionRedo"/>
    <addaction name="actionUndo"/>
   </widget>
-  <widget class="QToolBar" name="toolBar">
+  <widget class="QToolBar" name="toolBarHelp">
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
@@ -371,6 +398,51 @@
    </property>
    <property name="shortcut">
     <string>F2</string>
+   </property>
+  </action>
+  <action name="actionWorkflowFileOpenFile">
+   <property name="text">
+    <string>Open File</string>
+   </property>
+  </action>
+  <action name="actionWorkflowFileSaveProject">
+   <property name="text">
+    <string>Save Project</string>
+   </property>
+  </action>
+  <action name="actionWorkflowFileCloseProject">
+   <property name="text">
+    <string>Close Project</string>
+   </property>
+  </action>
+  <action name="actionWorkflowFileSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionWorkflowFileExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionWorkflowContextAddItem">
+   <property name="text">
+    <string>Context Add Item</string>
+   </property>
+  </action>
+  <action name="actionWorkflowContextRemoveItem">
+   <property name="text">
+    <string>Context Remove Item</string>
+   </property>
+  </action>
+  <action name="actionWorkflowContextSaveItem">
+   <property name="text">
+    <string>Context Save Item</string>
+   </property>
+  </action>
+  <action name="actionWorkflowShowPicture">
+   <property name="text">
+    <string>Show Picture</string>
    </property>
   </action>
  </widget>
@@ -667,6 +739,150 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>actionWorkflowFileOpenFile</sender>
+   <signal>triggered()</signal>
+   <receiver>HauptFenster</receiver>
+   <slot>slotActionWorkflowFileOpenFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>375</x>
+     <y>143</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionWorkflowFileSave</sender>
+   <signal>triggered()</signal>
+   <receiver>HauptFenster</receiver>
+   <slot>slotActionWorkflowFileSave()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>375</x>
+     <y>143</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionWorkflowFileSaveProject</sender>
+   <signal>triggered()</signal>
+   <receiver>HauptFenster</receiver>
+   <slot>slotActionWorkflowFileSaveProject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>375</x>
+     <y>143</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionWorkflowFileCloseProject</sender>
+   <signal>triggered()</signal>
+   <receiver>HauptFenster</receiver>
+   <slot>slotActionWorkflowFileCloseProject()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>375</x>
+     <y>143</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionWorkflowFileExit</sender>
+   <signal>triggered()</signal>
+   <receiver>HauptFenster</receiver>
+   <slot>slotActionWorkflowFileExit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>375</x>
+     <y>143</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionWorkflowContextAddItem</sender>
+   <signal>triggered()</signal>
+   <receiver>HauptFenster</receiver>
+   <slot>slotActionWorkflowContextAddItem()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>375</x>
+     <y>143</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionWorkflowContextRemoveItem</sender>
+   <signal>triggered()</signal>
+   <receiver>HauptFenster</receiver>
+   <slot>slotActionWorkflowContextRemoveItem()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>375</x>
+     <y>143</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionWorkflowContextSaveItem</sender>
+   <signal>triggered()</signal>
+   <receiver>HauptFenster</receiver>
+   <slot>slotActionWorkflowContextSaveItem()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>375</x>
+     <y>143</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionWorkflowShowPicture</sender>
+   <signal>triggered()</signal>
+   <receiver>HauptFenster</receiver>
+   <slot>slotActionWorkflowShowPicture()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>375</x>
+     <y>143</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>slotActionExit()</slot>
@@ -687,5 +903,14 @@
   <slot>slotActionUndo()</slot>
   <slot>slotActionWelcome()</slot>
   <slot>slotContextMenu(QPoint)</slot>
+  <slot>slotActionWorkflowFileOpenFile()</slot>
+  <slot>slotActionWorkflowFileSave()</slot>
+  <slot>slotActionWorkflowFileSaveProject()</slot>
+  <slot>slotActionWorkflowFileCloseProject()</slot>
+  <slot>slotActionWorkflowFileExit()</slot>
+  <slot>slotActionWorkflowContextAddItem()</slot>
+  <slot>slotActionWorkflowContextRemoveItem()</slot>
+  <slot>slotActionWorkflowContextSaveItem()</slot>
+  <slot>slotActionWorkflowShowPicture()</slot>
  </slots>
 </ui>
