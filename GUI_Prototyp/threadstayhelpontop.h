@@ -4,20 +4,20 @@
 #include <QtGui>
 #include <QMainWindow>
 
+
 class ThreadStayHelpOnTop : public QThread
 {
      Q_OBJECT
 
 public:
+
     ThreadStayHelpOnTop(QMainWindow *main);
     void stop();
-
-public slots:
-
 
 private:
     void run();
     QMainWindow *mainWindow;
+
     bool isThreadstopped = false;
 
 };

@@ -13,6 +13,7 @@ Overlay::Overlay(QWidget *parent) :
     this->setWindowFlags(Qt::WindowTransparentForInput);
 }
 
+
 Overlay::~Overlay()
 {
     delete ui;

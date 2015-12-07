@@ -532,22 +532,6 @@
    </hints>
   </connection>
   <connection>
-   <sender>actionOpen_File</sender>
-   <signal>triggered()</signal>
-   <receiver>HauptFenster</receiver>
-   <slot>slotActionOpenFile()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>-1</x>
-     <y>-1</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>391</x>
-     <y>285</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
    <sender>actionOpen_Help_Perspective</sender>
    <signal>triggered()</signal>
    <receiver>HauptFenster</receiver>
@@ -912,5 +896,6 @@
   <slot>slotActionWorkflowContextRemoveItem()</slot>
   <slot>slotActionWorkflowContextSaveItem()</slot>
   <slot>slotActionWorkflowShowPicture()</slot>
+  <slot>slotActionOpen_File_Triggered()</slot>
  </slots>
 </ui>
