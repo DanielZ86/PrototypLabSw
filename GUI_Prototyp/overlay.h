@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QToolBar>
 #include <QString>
+#include "ui_overlay.h"
 
 namespace Ui {
 class Overlay;

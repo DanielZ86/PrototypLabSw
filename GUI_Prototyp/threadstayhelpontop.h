@@ -4,7 +4,6 @@
 #include <QtGui>
 #include <QMainWindow>
 
-
 class ThreadStayHelpOnTop : public QThread
 {
      Q_OBJECT

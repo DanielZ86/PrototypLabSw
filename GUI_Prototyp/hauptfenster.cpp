@@ -1,11 +1,5 @@
 #include "hauptfenster.h"
 #include "ui_hauptfenster.h"
-#include <overlay.h>
-#include <QRect>
-#include <QPushButton>
-#include <QList>
-#include <QObject>
-#include <QToolButton>
 
 HauptFenster::HauptFenster(QWidget *parent) :
     QMainWindow(parent),
@@ -35,6 +29,7 @@ void HauptFenster::slotActionExit(){
 }
 
 void HauptFenster::closeEvent(QCloseEvent *event){
+    qDebug() << event;
     slotActionExit();
 }
 

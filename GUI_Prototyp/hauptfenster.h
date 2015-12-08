@@ -15,11 +15,13 @@
 #include <QFileSystemModel>
 #include <QImage>
 #include <QPixmap>
-#include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QToolBar>
-#include <QList>
+#include <QRect>
 #include <QPushButton>
+#include <QList>
+#include <QObject>
+#include <QToolButton>
 
 namespace Ui {
 class HauptFenster;
@@ -33,7 +35,6 @@ public:
     explicit HauptFenster(QWidget *parent = 0);
     ~HauptFenster();
 
-
 private:
     void closeEvent(QCloseEvent *event);
     void setHelpOnQToolBarAndOnPos(QString nameOfPos, QToolBar *qToolBar,  Overlay *helpWindow);
@@ -41,13 +42,11 @@ private:
     Ui::HauptFenster *ui;
     ThreadStayHelpOnTop *t;
     bool isHelpOn = false;
-
     QGraphicsView *graphicsView;
     QPixmap image;
     QImage  *imageObject;
     QGraphicsScene *scene;
     QFileSystemModel *fileModel;
-
     Overlay *helpWindow;
     QList<QPushButton*> helpButtons;
     QFileDialog *dialog;
@@ -89,12 +88,10 @@ public slots:
     void slotActionWorkflowContextRemoveItem();
     void slotActionWorkflowContextSaveItem();
     void slotActionWorkflowShowPicture();
-
     void slotActionOpen_File_Triggered();
     void slotActionDynamicHelpOpenFile();
     void What();
     void What2();
-
     void slotLoadPicture(QListWidgetItem*);
 
 
