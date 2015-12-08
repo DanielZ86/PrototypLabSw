@@ -18,7 +18,7 @@ private:
     void run();
     QMainWindow *mainWindow;
 
-    bool isThreadstopped = false;
+   bool isThreadstopped = false;
 
 };
 

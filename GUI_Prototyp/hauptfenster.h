@@ -54,7 +54,6 @@ private:
 
 
 public slots:
-    void pictureLoad(QListWidgetItem* item);
     void readXML();
     void writeXML();
     void listElements(QDomElement root, QString tagname, QString attribute);
@@ -92,9 +91,11 @@ public slots:
     void slotActionWorkflowShowPicture();
 
     void slotActionOpen_File_Triggered();
-void slotActionDynamicHelpOpenFile();
+    void slotActionDynamicHelpOpenFile();
     void What();
     void What2();
+
+    void slotLoadPicture(QListWidgetItem*);
 
 
 };

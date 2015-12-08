@@ -11,17 +11,9 @@ HauptFenster::HauptFenster(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::HauptFenster)
 {
-
     ui->setupUi(this);
-
     QObject::connect(ui->actionOpen_File, SIGNAL(triggered()), this, SLOT(slotActionOpenFile()), Qt::QueuedConnection);
     QObject::connect(ui->actionOpen_File, SIGNAL(triggered()), this, SLOT(slotActionOpen_File_Triggered()), Qt::QueuedConnection );
-
-
-   //  QObject::connect(ui->actionOpen_File, SIGNAL(triggered()), this, SLOT(slotActionOpenFile()),  Qt::QueuedConnection );
-  //   QObject::connect(ui->actionOpen_File, SIGNAL(triggered()), this, SLOT(slotActionOpen_File_Triggered()),  Qt::QueuedConnection );
-
-
 }
 
 HauptFenster::~HauptFenster()
@@ -30,17 +22,20 @@ HauptFenster::~HauptFenster()
 }
 
 void HauptFenster::slotActionExit(){
+    if(isHelpOn){
+        helpWindow->close();
+        foreach (QPushButton* btn, helpButtons) {
+            btn->close();
+        }
+        helpButtons.clear();
+        t->stop();
+        isHelpOn = false;
+    }
     this->close();
-    if(isHelpOn)
-    helpWindow->close();
 }
 
 void HauptFenster::closeEvent(QCloseEvent *event){
-    // // qDebug() << event;
-    if(isHelpOn){
-        helpWindow->close();
-    }
-    this->close();
+    slotActionExit();
 }
 
 void HauptFenster::slotActionAbout(){
@@ -52,7 +47,6 @@ void HauptFenster::slotActionClosePerspective(){
 }
 
 void HauptFenster::slotActionCloseProject(){
-    // // qDebug() << "slotActionCloseProject";
     ui->listWidget->clear();
     ui->graphicsView->setScene(NULL);
 }
@@ -98,7 +92,6 @@ void HauptFenster::slotActionResetPerspective(){
 }
 
 void HauptFenster::slotActionSave(){
-    // // qDebug() << "slotActionSave";
     int i = ui->listWidget->currentRow();
     QString imagePath = QFileDialog::getSaveFileName(this, tr("Save File"),"C://","PNG (*.png)");
     QFile file(imagePath);
@@ -106,7 +99,6 @@ void HauptFenster::slotActionSave(){
 }
 
 void HauptFenster::slotActionSaveProject(){
-    // // qDebug() << "slotActionSaveProject";
     writeXML();
 }
 
@@ -155,15 +147,6 @@ void HauptFenster::addFile( QString imagePath ){
     ui->listWidget->addItem(imagePath);
 }
 
-void HauptFenster::pictureLoad(QListWidgetItem *item){
-    imageObject = new QImage();
-    imageObject->load(item->text());
-    image = QPixmap::fromImage(*imageObject);
-    scene = new QGraphicsScene(this);
-    scene->addPixmap(image);
-    scene->setSceneRect(image.rect());
-    ui->graphicsView->setScene(scene);
-}
 
 void HauptFenster::readXML(){
     QDomDocument document;
@@ -185,7 +168,6 @@ void HauptFenster::readXML(){
 
 void HauptFenster::listElements(QDomElement root, QString tagname, QString attribute){
     QDomNodeList items = root.elementsByTagName(tagname);
-    // // qDebug() << "Total items = " << items.count();
     for(int i = 0; i < items.count(); i++){
         QDomNode itemnode = items.at(i);
         if(itemnode.isElement()){
@@ -251,7 +233,6 @@ void HauptFenster::setHelpOnQToolBarAndOnPos(QString nameOfPos, QToolBar *qToolB
               QPushButton *helpButton = new QPushButton(helpWindow);
               helpButton->setText("<--- Click here.");
               helpButton->setGeometry(x,y,100,30);
-              helpButton->setStyleSheet("{ color: white; background-color: black; }");
               helpButton->setWindowOpacity(1.0);
               helpButton->setAttribute(Qt::WA_TranslucentBackground, false);
               helpButton->setFlat(true);
@@ -320,9 +301,6 @@ if(isHelpOn){
     slotActionDynamicHelp();
         QToolBar *toolBar = ui->toolBarFileAndEdit;
         setHelpOnQToolBarAndOnPos("Close Project", toolBar,  helpWindow);
-
-
-
 }
 
 void HauptFenster::slotActionWorkflowFileExit(){
@@ -346,43 +324,43 @@ void HauptFenster::slotActionWorkflowShowPicture(){
 }
 
 void HauptFenster::slotActionOpenFile(){
-    // // qDebug() << "slotActionOpenFile";
     dialog = new QFileDialog(this, tr("Open File"),"C://","Picture (*.png);; Project (*.xml)");
-   // QString imagePath = QFileDialog::getOpenFileName(this, tr("Open File"),"C://","Picture (*.png);; Project (*.xml)");
     dialog->show();
     connect(dialog, SIGNAL(finished(int)), this, SLOT(What()));
 }
 
 void HauptFenster::What(){
-     helpWindow->close();
-     isHelpOn = false;
-     foreach (QPushButton* btn, helpButtons) {
-         btn->close();
+    if(isHelpOn){
+         helpWindow->close();
+         isHelpOn = false;
+         foreach (QPushButton* btn, helpButtons) {
+             btn->close();
+         }
+         QPushButton *helpButton = new QPushButton(this);
+         helpButton->setText("Workflow finished.\nPlease click to close this workflow.");
+         QRect temp = HauptFenster::geometry();
+         helpButton->setGeometry(0,0, temp.width(),temp.height());
+         helpButton->setWindowOpacity(1.0);
+         helpButton->setStyleSheet("background-color: white");
+         helpButton->setStyleSheet("color: black");
+         helpButton->setFlat(true);
+         helpButton->show();
+         helpButtons.push_front(helpButton);
+         connect(helpButton, SIGNAL(clicked(bool)), this, SLOT(What2()));
      }
-         /*if(imagePath.endsWith(".png")){
-             addFile(imagePath);
-         }else if (imagePath.endsWith(".xml")){
-             ui->listWidget->clear();
-             readXML(imagePath);
-         }*/
-     QPushButton *helpButton = new QPushButton(this);
-     helpButton->setText("Workflow finished.\nPlease click to close this workflow.");
-     QRect temp = HauptFenster::geometry();
-     helpButton->setGeometry(0,0, temp.width(),temp.height());
-     helpButton->setWindowOpacity(1.0);
-     helpButton->setStyleSheet("background-color: white");
-     helpButton->setStyleSheet("color: black");
-     helpButton->setFlat(true);
-     helpButton->show();
-     helpButtons.push_front(helpButton);
-     connect(helpButton, SIGNAL(clicked(bool)), this, SLOT(What2()));
+   QString imagePath = dialog->selectedFiles()[0];
+     if(imagePath.endsWith(".png")){
+         addFile(imagePath);
+     }else if (imagePath.endsWith(".xml")){
+         ui->listWidget->clear();
+         readXML(imagePath);
+     }
 }
 
 void HauptFenster::What2(){
     helpWindow->close();
     t->stop();
     isHelpOn = false;
-    //helpButton->close();
     foreach (QPushButton* btn, helpButtons) {
         btn->close();
     }
@@ -390,9 +368,12 @@ void HauptFenster::What2(){
 }
 
 void HauptFenster::slotActionDynamicHelpOpenFile(){
-    // // qDebug() << "slotActionDynamicHelp";
     if(isHelpOn){
         helpWindow->close();
+        foreach (QPushButton* btn, helpButtons) {
+            btn->close();
+        }
+        helpButtons.clear();
         t->stop();
         isHelpOn = false;
     }else{
@@ -410,21 +391,22 @@ void HauptFenster::slotActionOpen_File_Triggered(){
         helpWindow->close();
         isHelpOn = false;
         slotActionDynamicHelpOpenFile();
-        QList<QFileDialog *> listOfChildrenMain =  HauptFenster::findChildren<QFileDialog *>();
-        foreach (QObject* firstObject, listOfChildrenMain) {
-            if(firstObject->inherits("QFileDialog")){
-                QFileDialog *inhertObject = qobject_cast<QFileDialog *>(firstObject);
-                QRect posQFileDialog = inhertObject->geometry();
-                QPushButton *helpButton = new QPushButton(helpWindow);
-                helpButton->setText("<--- Choose your File.\nPicture: PNG\nProject: XML");
-                helpButton->setGeometry(posQFileDialog.x(),posQFileDialog.y(), 150,130);
-                helpButton->setStyleSheet("{ color: white; background-color: black; }");
-                helpButton->setWindowOpacity(1.0);
-                helpButton->setFlat(true);
-                helpButton->show();
-                helpButtons.push_front(helpButton);
-                break;
-            }
-        }
+        QPushButton *helpButton = new QPushButton(helpWindow);
+        helpButton->setText("<--- Choose your File.\nPicture: PNG\nProject: XML");
+        helpButton->setGeometry(dialog->x() + (dialog->width()/2),dialog->y() + (dialog->height()/2), 150,130);
+        helpButton->setWindowOpacity(1.0);
+        helpButton->setFlat(true);
+        helpButton->show();
+        helpButtons.push_front(helpButton);
     }
+}
+
+void HauptFenster::slotLoadPicture(QListWidgetItem *item){
+    imageObject = new QImage();
+    imageObject->load(item->text());
+    image = QPixmap::fromImage(*imageObject);
+    scene = new QGraphicsScene(this);
+    scene->addPixmap(image);
+    scene->setSceneRect(image.rect());
+    ui->graphicsView->setScene(scene);
 }
