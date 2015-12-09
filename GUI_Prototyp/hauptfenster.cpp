@@ -14,7 +14,7 @@ HauptFenster::~HauptFenster()
 {
     delete ui;
 }
-
+//rxdfcgvhbj
 void HauptFenster::slotActionExit(){
     if(isHelpOn){
         helpWindow->close();
