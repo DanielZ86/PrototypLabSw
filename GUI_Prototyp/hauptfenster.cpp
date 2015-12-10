@@ -222,8 +222,15 @@ void HauptFenster::setHelpOnQToolBarAndOnPos(QString nameOfPos, QToolBar *qToolB
         if(firstObject->inherits("QToolButton")){
             QToolButton *inhertObject = qobject_cast<QToolButton *>(firstObject);
             QRect geo = inhertObject->geometry();
-            int x = geo.x() + temp.x()  + geo.width() + temp2.x() - 10;
-            int y = geo.y() +temp.y() + geo.height() + temp2.y()- temp2.height();
+            int x = 0;
+            int y = 0;
+            if(geo.y() +temp.y() + geo.height() + temp2.y()- temp2.height() > 0 ){
+                x = geo.x() + temp.x()  + geo.width() + temp2.x() - 10;
+                y = geo.y() +temp.y() + geo.height() + temp2.y()- temp2.height();
+            }else  {
+                x = geo.x() + temp.x()  + geo.height() + temp2.x() + 45;
+                y = geo.y() +temp.y() + geo.width() + temp2.y()- temp2.width() +20;
+            }
             if(inhertObject->text()== nameOfPos){
               QPushButton *helpButton = new QPushButton(helpWindow);
               helpButton->setText("<--- Click here.");
