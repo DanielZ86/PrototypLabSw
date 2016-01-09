@@ -23,6 +23,12 @@
 #include <QObject>
 #include <QToolButton>
 
+/**
+ *  Author Daniel Zygar
+ *
+ *  Die Klasse HauptFenster
+ *  ist das Hauptfenster, es bildet ein Mini-MITK nach.
+ */
 namespace Ui {
 class HauptFenster;
 }

@@ -1,5 +1,10 @@
 #include "overlay.h"
-
+/**
+ *  Author Daniel Zygar
+ *
+ *  Die Klasse Overlay
+ *  erstellt ein transparentes Overlayout.
+ */
 Overlay::Overlay(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Overlay)

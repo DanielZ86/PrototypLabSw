@@ -5,7 +5,12 @@
 #include <QToolBar>
 #include <QString>
 #include "ui_overlay.h"
-
+/**
+ *  Author Daniel Zygar
+ *
+ *  Die Klasse Overlay
+ *  erstellt ein transparentes Overlayout.
+ */
 namespace Ui {
 class Overlay;
 }
