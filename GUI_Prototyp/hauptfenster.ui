@@ -48,6 +48,9 @@
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="title">
      <string>Edit</string>
     </property>
@@ -55,6 +58,9 @@
     <addaction name="actionRedo"/>
    </widget>
    <widget class="QMenu" name="menuWindow">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="title">
      <string>Window</string>
     </property>
@@ -75,6 +81,9 @@
       <string>Workflows</string>
      </property>
      <widget class="QMenu" name="menuContext">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
       <property name="title">
        <string>Context</string>
       </property>
@@ -109,6 +118,9 @@
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="toolBarFileAndEdit">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="toolButtonStyle">
     <enum>Qt::ToolButtonTextBesideIcon</enum>
    </property>
@@ -314,6 +326,9 @@
    </property>
   </action>
   <action name="actionUndo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="icons.qrc">
      <normaloff>:/icons/icons/edit-undo.png</normaloff>:/icons/icons/edit-undo.png</iconset>
@@ -326,6 +341,9 @@
    </property>
   </action>
   <action name="actionRedo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="icons.qrc">
      <normaloff>:/icons/icons/edit-redo.png</normaloff>:/icons/icons/edit-redo.png</iconset>
@@ -366,21 +384,33 @@
    </property>
   </action>
   <action name="actionWelcome">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Welcome</string>
    </property>
   </action>
   <action name="actionOpen_Help_Perspective">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Open Help Perspective</string>
    </property>
   </action>
   <action name="actionContext_Help">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Context Help</string>
    </property>
   </action>
   <action name="actionAbout">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>About</string>
    </property>
@@ -406,21 +436,33 @@
    </property>
   </action>
   <action name="actionWorkflowFileSaveProject">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Save Project</string>
    </property>
   </action>
   <action name="actionWorkflowFileCloseProject">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Close Project</string>
    </property>
   </action>
   <action name="actionWorkflowFileSave">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Save</string>
    </property>
   </action>
   <action name="actionWorkflowFileExit">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Exit</string>
    </property>
@@ -441,6 +483,9 @@
    </property>
   </action>
   <action name="actionWorkflowShowPicture">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Show Picture</string>
    </property>
