@@ -96,8 +96,8 @@ public slots:
     void slotActionWorkflowShowPicture();
     void slotActionOpen_File_Triggered();
     void slotActionDynamicHelpOpenFile();
-    void What();
-    void What2();
+    void slotActionOpenFileTaskOne();
+    void slotActionOpenFileTaskTwo();
     void slotLoadPicture(QListWidgetItem*);
 
 

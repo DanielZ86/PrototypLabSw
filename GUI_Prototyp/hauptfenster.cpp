@@ -19,6 +19,7 @@ HauptFenster::~HauptFenster()
 {
     delete ui;
 }
+
 /**
  * @brief HauptFenster::slotActionExit
  * Beendet das Programm und schließt alle offenen Helpfenster.
@@ -35,6 +36,7 @@ void HauptFenster::slotActionExit(){
     }
     this->close();
 }
+
 /**
  * @brief HauptFenster::closeEvent
  * @param event
@@ -44,18 +46,21 @@ void HauptFenster::closeEvent(QCloseEvent *event){
     qDebug() << event;
     slotActionExit();
 }
+
 /**
  * @brief HauptFenster::slotActionAbout
  * not implemented yet.
  */
 void HauptFenster::slotActionAbout(){
 }
+
 /**
  * @brief HauptFenster::slotActionClosePerspective
  * not implemented yet.
  */
 void HauptFenster::slotActionClosePerspective(){
 }
+
 /**
  * @brief HauptFenster::slotActionCloseProject
  * schließt ein Projekt.
@@ -64,12 +69,14 @@ void HauptFenster::slotActionCloseProject(){
     ui->listWidget->clear();
     ui->graphicsView->setScene(NULL);
 }
+
 /**
  * @brief HauptFenster::slotActionContextHelp
  * not implemented yet.
  */
 void HauptFenster::slotActionContextHelp(){
 }
+
 /**
  * @brief HauptFenster::slotActionDynamicHelp
  * erstellt einen Thread und öffnet die dynamische Hilfe.
@@ -95,30 +102,35 @@ void HauptFenster::slotActionDynamicHelp(){
  */
 void HauptFenster::slotActionOpenHelpPerspective(){
 }
+
 /**
  * @brief HauptFenster::slotActionOpenPerspective
  * not implemented yet.
 */
 void HauptFenster::slotActionOpenPerspective(){
 }
+
 /**
  * @brief HauptFenster::slotActionPreferences
  * not implemented yet.
  */
 void HauptFenster::slotActionPreferences(){
 }
+
 /**
  * @brief HauptFenster::slotActionRedo
  * not implemented yet.
  */
 void HauptFenster::slotActionRedo(){
 }
+
 /**
  * @brief HauptFenster::slotActionResetPerspective
  * not implemented yet.
  */
 void HauptFenster::slotActionResetPerspective(){
 }
+
 /**
  * @brief HauptFenster::slotActionSave
  * Speichert das ausgewählte Bild an einem gewünschten Ort auf dem Rechner ab.
@@ -130,6 +142,7 @@ void HauptFenster::slotActionSave(){
     QFile file(imagePath);
     QFile::copy(ui->listWidget->item(i)->text(), imagePath);
 }
+
 /**
  * @brief HauptFenster::slotActionSaveProject
  * Führt die Methode WriteXML aus, diese speichert das Projekt in einer XML Datei ab.
@@ -137,24 +150,28 @@ void HauptFenster::slotActionSave(){
 void HauptFenster::slotActionSaveProject(){
     writeXML();
 }
+
 /**
  * @brief HauptFenster::slotActionShowView
  * not implemented yet.
  */
 void HauptFenster::slotActionShowView(){
 }
+
 /**
  * @brief HauptFenster::slotActionUndo
  * not implemented yet.
  */
 void HauptFenster::slotActionUndo(){
 }
+
 /**
  * @brief HauptFenster::slotActionWelcome
  * not implemented yet.
  */
 void HauptFenster::slotActionWelcome(){
 }
+
 /**
  * @brief HauptFenster::slotContextMenu
  * @param point
@@ -178,6 +195,7 @@ void HauptFenster::saveFile(){
     QFile file(imagePath);   
     QFile::copy(ui->listWidget->item(i)->text(), imagePath);  
 }
+
 /**
  * @brief HauptFenster::removeFile
  * Löscht ein ausgewähltes Bild aus der Liste.
@@ -227,6 +245,7 @@ void HauptFenster::readXML(){
     listElements(root, "Pictures", "Name");
     // // qDebug() << "Finished";
 }
+
 /**
  * @brief HauptFenster::listElements
  * @param root ein QDomElement
@@ -244,6 +263,7 @@ void HauptFenster::listElements(QDomElement root, QString tagname, QString attri
         }
     }
 }
+
 /**
  * @brief HauptFenster::writeXML
  * Schreibt das Projekt in eine XML Datei.
@@ -272,6 +292,7 @@ void HauptFenster::writeXML(){
         // // qDebug() << "Finished";
    }
 }
+
 /**
  * @brief HauptFenster::readXML
  * @param imagePath
@@ -294,6 +315,7 @@ void HauptFenster::readXML(QString imagePath){
     listElements(root, "Pictures", "Name");
     // // qDebug() << "Finished";
 }
+
 /**
  * @brief HauptFenster::setHelpOnQToolBarAndOnPos
  * @param nameOfPos der lesbare Text des QToolBarItem, welches man verwenden möchte.
@@ -332,6 +354,205 @@ void HauptFenster::setHelpOnQToolBarAndOnPos(QString nameOfPos, QToolBar *qToolB
     }
 }
 
+/**
+ * @brief HauptFenster::slotActionWorkflowFileOpenFile
+ * Startet den Help-Workflow für OpenFile.
+ */
+void HauptFenster::slotActionWorkflowFileOpenFile(){
+    if(isHelpOn){
+        helpWindow->close();
+        isHelpOn = false;
+    }
+    slotActionDynamicHelp();
+    QToolBar *toolBar = ui->toolBarFileAndEdit;
+    setHelpOnQToolBarAndOnPos("Open File", toolBar,  helpWindow);
+}
+
+/**
+ * @brief HauptFenster::slotActionWorkflowFileSave
+ *  not implemented yet.
+ */
+void HauptFenster::slotActionWorkflowFileSave(){
+
+}
+
+/**
+ * @brief HauptFenster::slotActionWorkflowFileSaveProject
+ * Startet den Help-Workflow für SaveProject
+ */
+void HauptFenster::slotActionWorkflowFileSaveProject(){
+    if(isHelpOn){
+        helpWindow->close();
+        isHelpOn = false;
+    }
+    slotActionDynamicHelp();
+    QToolBar *toolBar = ui->toolBarFileAndEdit;
+    setHelpOnQToolBarAndOnPos("Save Project", toolBar,  helpWindow);
+}
+
+/**
+ * @brief HauptFenster::slotActionWorkflowFileCloseProject
+ * Startet den Help-Workflow für CloseProject
+ */
+void HauptFenster::slotActionWorkflowFileCloseProject(){
+if(isHelpOn){
+    helpWindow->close();
+    isHelpOn = false;
+}
+    slotActionDynamicHelp();
+        QToolBar *toolBar = ui->toolBarFileAndEdit;
+        setHelpOnQToolBarAndOnPos("Close Project", toolBar,  helpWindow);
+}
+
+/**
+ * @brief HauptFenster::slotActionWorkflowFileExit
+ * not implemented yet.
+ */
+void HauptFenster::slotActionWorkflowFileExit(){
+}
+
+/**
+ * @brief HauptFenster::slotActionWorkflowContextAddItem
+ * not implemented yet.
+ */
+void HauptFenster::slotActionWorkflowContextAddItem(){
+}
+
+/**
+ * @brief HauptFenster::slotActionWorkflowContextRemoveItem
+ * not implemented yet.
+ */
+void HauptFenster::slotActionWorkflowContextRemoveItem(){
+}
+
+/**
+ * @brief HauptFenster::slotActionWorkflowContextSaveItem
+ * not implemented yet.
+ */
+void HauptFenster::slotActionWorkflowContextSaveItem(){
+}
+
+/**
+ * @brief HauptFenster::slotActionWorkflowShowPicture
+ * not implemented yet.
+ */
+void HauptFenster::slotActionWorkflowShowPicture(){
+}
+
+/**
+ * @brief HauptFenster::slotActionOpenFile
+ * Erster Schritt des Workflows OpenFile (sind zwei gleichzeitig).
+ */
+void HauptFenster::slotActionOpenFile(){
+    dialog = new QFileDialog(this, tr("Open File"),"C://","Picture (*.png);; Project (*.xml)");
+    dialog->show();
+    connect(dialog, SIGNAL(finished(int)), this, SLOT(slotActionOpenFileTaskOne()));
+}
+
+/**
+ * @brief HauptFenster::slotActionOpenFileTaskOne
+ * Zweiter Schritt des Workflows OpenFile.
+ */
+void HauptFenster::slotActionOpenFileTaskOne(){
+    if(isHelpOn){
+         helpWindow->close();
+         isHelpOn = false;
+         foreach (QPushButton* btn, helpButtons) {
+             btn->close();
+         }
+         QPushButton *helpButton = new QPushButton(this);
+         helpButton->setText("Workflow finished.\nPlease click to close this workflow.");
+         QRect temp = HauptFenster::geometry();
+         helpButton->setGeometry(0,0, temp.width(),temp.height());
+         helpButton->setWindowOpacity(1.0);
+         helpButton->setStyleSheet("background-color: white");
+         helpButton->setStyleSheet("color: black");
+         helpButton->setFlat(true);
+         helpButton->show();
+         helpButtons.push_front(helpButton);
+         connect(helpButton, SIGNAL(clicked(bool)), this, SLOT(slotActionOpenFileTaskTwo()));
+     }
+   QString imagePath = dialog->selectedFiles()[0];
+     if(imagePath.endsWith(".png")){
+         addFile(imagePath);
+     }else if (imagePath.endsWith(".xml")){
+         ui->listWidget->clear();
+         readXML(imagePath);
+     }
+}
+
+/**
+ * @brief HauptFenster::slotActionOpenFileTaskTwo
+ * Dritter Schritt des Workflows OpenFile.
+ */
+void HauptFenster::slotActionOpenFileTaskTwo(){
+    helpWindow->close();
+    t->stop();
+    isHelpOn = false;
+    foreach (QPushButton* btn, helpButtons) {
+        btn->close();
+    }
+    helpButtons.clear();
+}
+
+/**
+ * @brief HauptFenster::slotActionDynamicHelpOpenFile
+ * Öffnet ein neues HelpWindow.
+ */
+void HauptFenster::slotActionDynamicHelpOpenFile(){
+    if(isHelpOn){
+        helpWindow->close();
+        foreach (QPushButton* btn, helpButtons) {
+            btn->close();
+        }
+        helpButtons.clear();
+        t->stop();
+        isHelpOn = false;
+    }else{
+        helpWindow = new Overlay();
+        helpWindow->showFullScreen();
+        isHelpOn=true;
+        t = new ThreadStayHelpOnTop(helpWindow);
+        t->start();
+    }
+}
+
+/**
+ * @brief HauptFenster::slotActionOpen_File_Triggered
+ * Erster Schritt des Workflows OpenFile (sind zwei gleichzeitig).
+ */
+void HauptFenster::slotActionOpen_File_Triggered(){
+    Sleep(100);
+    if(isHelpOn){
+        helpWindow->close();
+        isHelpOn = false;
+        slotActionDynamicHelpOpenFile();
+        QPushButton *helpButton = new QPushButton(helpWindow);
+        helpButton->setText("<--- Choose your File.\nPicture: PNG\nProject: XML");
+        helpButton->setGeometry(dialog->x() + (dialog->width()/2),dialog->y() + (dialog->height()/2), 150,130);
+        helpButton->setWindowOpacity(1.0);
+        helpButton->setFlat(true);
+        helpButton->show();
+        helpButtons.push_front(helpButton);
+    }
+}
+
+/**
+ * @brief HauptFenster::slotLoadPicture
+ * @param item
+ * Lädt ein Bild in ein QListWidget.
+ */
+void HauptFenster::slotLoadPicture(QListWidgetItem *item){
+    imageObject = new QImage();
+    imageObject->load(item->text());
+    image = QPixmap::fromImage(*imageObject);
+    scene = new QGraphicsScene(this);
+    scene->addPixmap(image);
+    scene->setSceneRect(image.rect());
+    ui->graphicsView->setScene(scene);
+}
+
+// Methode um die Position eines QMenueItems zuermittlen, noch nicht ganz fertig.
 /*
 void hauptFenster::setHelpOnQMenue(QString nameOfPos, QMenuBar *qMenuBar){
     QRect temp = hauptFenster::geometry();
@@ -357,191 +578,3 @@ void hauptFenster::setHelpOnQMenue(QString nameOfPos, QMenuBar *qMenuBar){
     }
 }
 */
-/**
- * @brief HauptFenster::slotActionWorkflowFileOpenFile
- * Startet den Help-Workflow für OpenFile.
- */
-void HauptFenster::slotActionWorkflowFileOpenFile(){
-    if(isHelpOn){
-        helpWindow->close();
-        isHelpOn = false;
-    }
-    slotActionDynamicHelp();
-    QToolBar *toolBar = ui->toolBarFileAndEdit;
-    setHelpOnQToolBarAndOnPos("Open File", toolBar,  helpWindow);
-}
-/**
- * @brief HauptFenster::slotActionWorkflowFileSave
- *  not implemented yet.
- */
-void HauptFenster::slotActionWorkflowFileSave(){
-
-}
-/**
- * @brief HauptFenster::slotActionWorkflowFileSaveProject
- * Startet den Help-Workflow für SaveProject
- */
-void HauptFenster::slotActionWorkflowFileSaveProject(){
-    if(isHelpOn){
-        helpWindow->close();
-        isHelpOn = false;
-    }
-    slotActionDynamicHelp();
-    QToolBar *toolBar = ui->toolBarFileAndEdit;
-    setHelpOnQToolBarAndOnPos("Save Project", toolBar,  helpWindow);
-}
-/**
- * @brief HauptFenster::slotActionWorkflowFileCloseProject
- * Startet den Help-Workflow für CloseProject
- */
-void HauptFenster::slotActionWorkflowFileCloseProject(){
-if(isHelpOn){
-    helpWindow->close();
-    isHelpOn = false;
-}
-    slotActionDynamicHelp();
-        QToolBar *toolBar = ui->toolBarFileAndEdit;
-        setHelpOnQToolBarAndOnPos("Close Project", toolBar,  helpWindow);
-}
-/**
- * @brief HauptFenster::slotActionWorkflowFileExit
- * not implemented yet.
- */
-void HauptFenster::slotActionWorkflowFileExit(){
-
-}
-/**
- * @brief HauptFenster::slotActionWorkflowContextAddItem
- * not implemented yet.
- */
-void HauptFenster::slotActionWorkflowContextAddItem(){
-
-}
-/**
- * @brief HauptFenster::slotActionWorkflowContextRemoveItem
- * not implemented yet.
- */
-void HauptFenster::slotActionWorkflowContextRemoveItem(){
-
-}
-/**
- * @brief HauptFenster::slotActionWorkflowContextSaveItem
- * not implemented yet.
- */
-void HauptFenster::slotActionWorkflowContextSaveItem(){
-
-}
-/**
- * @brief HauptFenster::slotActionWorkflowShowPicture
- * not implemented yet.
- */
-void HauptFenster::slotActionWorkflowShowPicture(){
-
-}
-/**
- * @brief HauptFenster::slotActionOpenFile
- * Erster Schritt des Workflows OpenFile (sind zwei gleichzeitig).
- */
-void HauptFenster::slotActionOpenFile(){
-    dialog = new QFileDialog(this, tr("Open File"),"C://","Picture (*.png);; Project (*.xml)");
-    dialog->show();
-    connect(dialog, SIGNAL(finished(int)), this, SLOT(What()));
-}
-/**
- * @brief HauptFenster::What
- * Zweiter Schritt des Workflows OpenFile.
- */
-void HauptFenster::What(){
-    if(isHelpOn){
-         helpWindow->close();
-         isHelpOn = false;
-         foreach (QPushButton* btn, helpButtons) {
-             btn->close();
-         }
-         QPushButton *helpButton = new QPushButton(this);
-         helpButton->setText("Workflow finished.\nPlease click to close this workflow.");
-         QRect temp = HauptFenster::geometry();
-         helpButton->setGeometry(0,0, temp.width(),temp.height());
-         helpButton->setWindowOpacity(1.0);
-         helpButton->setStyleSheet("background-color: white");
-         helpButton->setStyleSheet("color: black");
-         helpButton->setFlat(true);
-         helpButton->show();
-         helpButtons.push_front(helpButton);
-         connect(helpButton, SIGNAL(clicked(bool)), this, SLOT(What2()));
-     }
-   QString imagePath = dialog->selectedFiles()[0];
-     if(imagePath.endsWith(".png")){
-         addFile(imagePath);
-     }else if (imagePath.endsWith(".xml")){
-         ui->listWidget->clear();
-         readXML(imagePath);
-     }
-}
-/**
- * @brief HauptFenster::What2
- * Dritter Schritt des Workflows OpenFile.
- */
-void HauptFenster::What2(){
-    helpWindow->close();
-    t->stop();
-    isHelpOn = false;
-    foreach (QPushButton* btn, helpButtons) {
-        btn->close();
-    }
-    helpButtons.clear();
-}
-/**
- * @brief HauptFenster::slotActionDynamicHelpOpenFile
- * Öffnet ein neues HelpWindow.
- */
-void HauptFenster::slotActionDynamicHelpOpenFile(){
-    if(isHelpOn){
-        helpWindow->close();
-        foreach (QPushButton* btn, helpButtons) {
-            btn->close();
-        }
-        helpButtons.clear();
-        t->stop();
-        isHelpOn = false;
-    }else{
-        helpWindow = new Overlay();
-        helpWindow->showFullScreen();
-        isHelpOn=true;
-        t = new ThreadStayHelpOnTop(helpWindow);
-        t->start();
-    }
-}
-/**
- * @brief HauptFenster::slotActionOpen_File_Triggered
- * Erster Schritt des Workflows OpenFile (sind zwei gleichzeitig).
- */
-void HauptFenster::slotActionOpen_File_Triggered(){
-    Sleep(100);
-    if(isHelpOn){
-        helpWindow->close();
-        isHelpOn = false;
-        slotActionDynamicHelpOpenFile();
-        QPushButton *helpButton = new QPushButton(helpWindow);
-        helpButton->setText("<--- Choose your File.\nPicture: PNG\nProject: XML");
-        helpButton->setGeometry(dialog->x() + (dialog->width()/2),dialog->y() + (dialog->height()/2), 150,130);
-        helpButton->setWindowOpacity(1.0);
-        helpButton->setFlat(true);
-        helpButton->show();
-        helpButtons.push_front(helpButton);
-    }
-}
-/**
- * @brief HauptFenster::slotLoadPicture
- * @param item
- * Lädt ein Bild in ein QListWidget.
- */
-void HauptFenster::slotLoadPicture(QListWidgetItem *item){
-    imageObject = new QImage();
-    imageObject->load(item->text());
-    image = QPixmap::fromImage(*imageObject);
-    scene = new QGraphicsScene(this);
-    scene->addPixmap(image);
-    scene->setSceneRect(image.rect());
-    ui->graphicsView->setScene(scene);
-}
